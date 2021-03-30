@@ -1,0 +1,34 @@
+{-# STDLIB_VERSION 4 #-}
+{-# CONTENT_TYPE DAPP #-}
+{-# SCRIPT_TYPE ACCOUNT #-}
+
+let wvs = 100000000
+# Rewards amount
+let reward = 100000
+# The number of blocks through which you can get the reward again
+let countBlock = 10
+
+@Callable(i)
+func faucet() = {
+  let caller = addressFromPublicKey(i.callerPublicKey)
+  let currentBlock = lastBlock.height
+  let lastCallerBlock = match getInteger(this, caller.toString()) {
+    case a:Int => a
+    case _ => 0
+  }
+  if (currentBlock - lastCallerBlock > countBlock)
+    then [
+      IntegerEntry(caller.toString(), currentBlock),
+      ScriptTransfer(caller, reward, unit)
+    ]
+    else throw("Insufficient funds")
+}
+
+@Verifier(tx)
+func verify() = {
+  match(tx) {
+    case _:DataTransaction => false
+    case _:SetScriptTransaction => false
+    case _ => sigVerify(tx.bodyBytes, tx.proofs[0], tx.senderPublicKey)
+  }
+}
