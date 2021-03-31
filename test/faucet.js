@@ -14,7 +14,7 @@ describe('Faucet', () => {
         await waitForTx(dAppTx.id)
     })
 
-    it('should correct mint execution', async () => {
+    it('should correct faucet execution', async () => {
         const tx = invokeScript({
             dApp: address(accounts.faucet),
             call: {
