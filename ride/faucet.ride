@@ -4,6 +4,7 @@
 
 # Faucet smart contract for Waves testnet
 
+# Waves decimals
 let wvs = 100000000
 # Rewards amount
 # let reward = 10 * wvs
