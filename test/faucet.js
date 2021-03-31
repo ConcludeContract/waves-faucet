@@ -25,4 +25,15 @@ describe('Faucet', () => {
         await broadcast(tx)
         await waitForTx(tx.id)
     })
+
+    it('should reject faucet', async () => {
+        const tx = invokeScript({
+            dApp: address(accounts.faucet),
+            call: {
+                function: "faucet",
+            }
+        }, accounts.recipient);
+
+        await expect(broadcast(tx)).rejectedWith()
+    })
 })
