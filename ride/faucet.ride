@@ -6,8 +6,10 @@
 
 let wvs = 100000000
 # Rewards amount
+# let reward = 10 * wvs
 let reward = 100000
 # The number of blocks through which you can get the reward again
+# let countBlock = 24 * 60
 let countBlock = 10
 
 @Callable(i)
