@@ -7,8 +7,6 @@ describe('Faucet', () => {
             recipient: 0.1 * wvs
         })
         const compiledDapp = compile(file('faucet.ride'))
-        const faucetAddress = address(accounts.faucet)
-
         const dAppTx = setScript({script: compiledDapp}, accounts.faucet)
         await broadcast(dAppTx)
         await waitForTx(dAppTx.id)
