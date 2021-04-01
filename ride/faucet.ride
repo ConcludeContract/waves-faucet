@@ -26,7 +26,7 @@ func faucet() = {
       IntegerEntry(caller.toString(), currentBlock),
       ScriptTransfer(caller, reward, unit)
     ]
-    else throw("Insufficient funds")
+    else throw("Tokens can only be received once a day")
 }
 
 @Verifier(tx)
